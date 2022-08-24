@@ -90,6 +90,22 @@ RegisterNetEvent("qb-bossmenu:server:depositMoney", function(amount)
 	TriggerClientEvent('qb-bossmenu:client:OpenMenu', src)
 end)
 
+RegisterServerEvent("qb-bossmenu:server:okokBillingDeposit")
+AddEventHandler("qb-bossmenu:server:okokBillingDeposit", function(job, amount)
+    local src = source
+    local xPlayer = QBCore.Functions.GetPlayer(src)
+
+    if not Accounts[job] then
+        Accounts[job] = 0
+    end
+
+    Accounts[job] = Accounts[job] + amount
+
+    TriggerClientEvent('qb-bossmenu:client:refreshSociety', -1, job, Accounts[job])
+    --SaveResourceFile(GetCurrentResourceName(), "./database.json", json.encode(Accounts), -1)
+    TriggerEvent('qb-log:server:CreateLog', 'bossmenu', 'Deposit Money', "Successfully deposited $" .. amount .. ' (' .. job .. ')', src)
+end)
+
 QBCore.Functions.CreateCallback('qb-bossmenu:server:GetAccount', function(_, cb, jobname)
 	local result = GetAccount(jobname)
 	cb(result)
