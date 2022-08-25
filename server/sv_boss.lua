@@ -25,7 +25,12 @@ function AddMoney(account, amount)
 	end
 
 	Accounts[account] = Accounts[account] + amount
-	MySQL.update('UPDATE management_funds SET amount = ? WHERE job_name = ? and type = "boss"', { Accounts[account], account })
+	MySQL.insert('INSERT INTO management_funds (job_name, amount, type) VALUES (:job_name, :amount, :type) ON DUPLICATE KEY UPDATE amount = :amount',
+		{
+			['job_name'] = account,
+			['amount'] = Accounts[account],
+			['type'] = 'boss'
+		})
 end
 
 function RemoveMoney(account, amount)
@@ -90,6 +95,22 @@ RegisterNetEvent("qb-bossmenu:server:depositMoney", function(amount)
 	TriggerClientEvent('qb-bossmenu:client:OpenMenu', src)
 end)
 
+RegisterServerEvent("qb-bossmenu:server:okokBillingDeposit")
+AddEventHandler("qb-bossmenu:server:okokBillingDeposit", function(job, amount)
+    local src = source
+    local xPlayer = QBCore.Functions.GetPlayer(src)
+
+    if not Accounts[job] then
+        Accounts[job] = 0
+    end
+
+    Accounts[job] = Accounts[job] + amount
+
+    TriggerClientEvent('qb-bossmenu:client:refreshSociety', -1, job, Accounts[job])
+    --SaveResourceFile(GetCurrentResourceName(), "./database.json", json.encode(Accounts), -1)
+    TriggerEvent('qb-log:server:CreateLog', 'bossmenu', 'Deposit Money', "Successfully deposited $" .. amount .. ' (' .. job .. ')', src)
+end)
+
 QBCore.Functions.CreateCallback('qb-bossmenu:server:GetAccount', function(_, cb, jobname)
 	local result = GetAccount(jobname)
 	cb(result)
@@ -138,7 +159,8 @@ RegisterNetEvent('qb-bossmenu:server:GradeUpdate', function(data)
 	local Employee = QBCore.Functions.GetPlayerByCitizenId(data.cid)
 
 	if not Player.PlayerData.job.isboss then ExploitBan(src, 'GradeUpdate Exploiting') return end
-
+	if data.grade > Player.PlayerData.job.grade.level then TriggerClientEvent('QBCore:Notify', src, "You cannot promote to this rank!", "error") return end
+	
 	if Employee then
 		if Employee.Functions.SetJob(Player.PlayerData.job.name, data.grade) then
 			TriggerClientEvent('QBCore:Notify', src, "Sucessfulluy promoted!", "success")
@@ -162,6 +184,7 @@ RegisterNetEvent('qb-bossmenu:server:FireEmployee', function(target)
 
 	if Employee then
 		if target ~= Player.PlayerData.citizenid then
+			if Employee.PlayerData.job.grade.level > Player.PlayerData.job.grade.level then TriggerClientEvent('QBCore:Notify', src, "You cannot fire this citizen!", "error") return end
 			if Employee.Functions.SetJob("unemployed", '0') then
 				TriggerEvent("qb-log:server:CreateLog", "bossmenu", "Job Fire", "red", Player.PlayerData.charinfo.firstname .. " " .. Player.PlayerData.charinfo.lastname .. ' successfully fired ' .. Employee.PlayerData.charinfo.firstname .. " " .. Employee.PlayerData.charinfo.lastname .. " (" .. Player.PlayerData.job.name .. ")", false)
 				TriggerClientEvent('QBCore:Notify', src, "Employee fired!", "success")
@@ -176,6 +199,8 @@ RegisterNetEvent('qb-bossmenu:server:FireEmployee', function(target)
 		local player = MySQL.query.await('SELECT * FROM players WHERE citizenid = ? LIMIT 1', { target })
 		if player[1] ~= nil then
 			Employee = player[1]
+			Employee.job = json.decode(Employee.job)
+			if Employee.job.grade.level > Player.PlayerData.job.grade.level then TriggerClientEvent('QBCore:Notify', src, "You cannot fire this citizen!", "error") return end
 			local job = {}
 			job.name = "unemployed"
 			job.label = "Unemployed"
