@@ -47,7 +47,7 @@ Config.BossMenuZones = {
 
 Config.GangMenus = {
     ['lostmc'] = {
-        vector3(150.64, 329.31, 111.89),
+        vector3(143.41, 331.0, 111.89),
     },
     ['ballas'] = {
         vector3(108.47, -1981.87, 20.96),
@@ -103,7 +103,7 @@ Config.GangMenuZones = {
     },
     ]]
     ['lostmc'] = {
-        { coords = vector3(150.64, 329.31, 111.89), length = 2.35, width = 2.35, heading = 206.26, minZ = 110.89, maxZ = 112.89 } ,
+        { coords = vector3(143.41, 331.0, 111.89), length = 2.35, width = 2.35, heading = 206.26, minZ = 110.89, maxZ = 112.89 } ,
     },
     ['ballas'] = {
         { coords = vector3(108.47, -1981.87, 20.96), length = 2.35, width = 2.45, heading = 27.95, minZ = 19.96, maxZ = 21.96 } ,
