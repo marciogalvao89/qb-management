@@ -103,51 +103,51 @@ Config.GangMenuZones = {
     },
     ]]
     ['lostmc'] = {
-        { coords = vector3(150.64, 329.31, 111.89), length = 2.35, width = 2.35, heading = 206.26, minZ = 30.58, maxZ = 30.68 } ,
+        { coords = vector3(150.64, 329.31, 111.89), length = 2.35, width = 2.35, heading = 206.26, minZ = 110.89, maxZ = 112.89 } ,
     },
     ['ballas'] = {
         { coords = vector3(108.47, -1981.87, 20.96), length = 2.35, width = 2.45, heading = 27.95, minZ = 19.96, maxZ = 21.96 } ,
     },
     ['vagos'] = {
-        { coords = vector3(332.36, -2013.06, 22.39), length = 2.35, width = 2.35, heading = 50.38, minZ = 30.58, maxZ = 30.68 } ,
+        { coords = vector3(332.36, -2013.06, 22.39), length = 2.35, width = 2.35, heading = 50.38, minZ = 21.39, maxZ = 22.39 } ,
     },
     ['cartel'] = {
-        { coords = vector3(-1791.57, 438.19, 128.51), length = 2.35, width = 2.35, heading = 0.37, minZ = 30.58, maxZ = 30.68 } ,
+        { coords = vector3(-1791.57, 438.19, 128.51), length = 2.35, width = 2.35, heading = 0.37, minZ = 127.51, maxZ = 128.51 } ,
     },
     ['families'] = {
-        { coords = vector3(-804.68, 177.32, 72.83), length = 2.35, width = 2.35, heading = 14.26, minZ = 30.58, maxZ = 30.68 } ,
+        { coords = vector3(-804.68, 177.32, 72.83), length = 2.35, width = 2.35, heading = 14.26, minZ = 71.83, maxZ = 73.83 } ,
     },
     ['triads'] = {
-        { coords = vector3(1439.1, -1489.22, 66.62), length = 2.35, width = 2.35, heading = 206.26, minZ = 30.58, maxZ = 30.68 } ,
+        { coords = vector3(1439.1, -1489.22, 66.62), length = 2.35, width = 2.35, heading = 206.26, minZ = 65.62, maxZ = 67.62 } ,
     },
     ['camorra'] = {
-        { coords = vector3(-1512.71, 840.77, 186.14), length = 2.35, width = 2.35, heading = 254.71, minZ = 30.58, maxZ = 30.68 } ,
+        { coords = vector3(-1512.71, 840.77, 186.14), length = 2.35, width = 2.35, heading = 254.71, minZ = 185.14, maxZ = 187.14 } ,
     },
     ['peakyblinders'] = {
-        { coords = vector3(-2581.26, 1892.02, 163.72), length = 2.35, width = 2.35, heading = 307.25, minZ = 30.58, maxZ = 30.68 } ,
+        { coords = vector3(-2581.26, 1892.02, 163.72), length = 2.35, width = 2.35, heading = 307.25, minZ = 162.72, maxZ = 164.72 } ,
     },
     ['aztecas'] = {
-        { coords = vector3(-1092.9, -1669.45, 8.41), length = 2.35, width = 2.35, heading = 206.26, minZ = 30.58, maxZ = 30.68 } ,
+        { coords = vector3(-1092.9, -1669.45, 8.41), length = 2.35, width = 2.35, heading = 206.26, minZ = 7.41, maxZ = 9.41 } ,
     },
     ['bloods'] = {
-        { coords = vector3(-1568.53, -405.48, 48.26), length = 2.35, width = 2.35, heading = 47.61, minZ = 30.58, maxZ = 30.68 } ,
+        { coords = vector3(-1568.53, -405.48, 48.26), length = 2.35, width = 2.35, heading = 47.61, minZ = 47.26, maxZ = 49.26 } ,
     },
     ['piratas'] = {
-        { coords = vector3(3147.46, 2215.32, 3.19), length = 2.35, width = 2.35, heading = 217.29, minZ = 30.58, maxZ = 30.68 } ,
+        { coords = vector3(3147.46, 2215.32, 3.19), length = 2.35, width = 2.35, heading = 217.29, minZ = 1.19, maxZ = 4.19 } ,
     },
     ['crips'] = {
-        { coords = vector3(-1572.12, -234.48, 54.82), length = 2.35, width = 2.35, heading = 246.91, minZ = 30.58, maxZ = 30.68 } ,
+        { coords = vector3(-1572.12, -234.48, 54.82), length = 2.35, width = 2.35, heading = 246.91, minZ = 53.82, maxZ = 55.82 } ,
     },
     ['outlaws'] = {
-        { coords = vector3(-368.68, 75.7, 54.42), length = 2.35, width = 2.35, heading = 87.4, minZ = 30.58, maxZ = 30.68 } ,
+        { coords = vector3(-368.68, 75.7, 54.42), length = 2.35, width = 2.35, heading = 87.4, minZ = 53.42, maxZ = 55.42 } ,
     },
     ['fazendeiros'] = {
-        { coords = vector3(2143.12, 3901.51, 34.37), length = 2.35, width = 2.35, heading = 275.93, minZ = 30.58, maxZ = 30.68 } ,
+        { coords = vector3(2143.12, 3901.51, 34.37), length = 2.35, width = 2.35, heading = 275.93, minZ = 33.37, maxZ = 35.37 } ,
     },
     ['grove'] = {
-        { coords = vector3(-137.0, -1608.75, 35.03), length = 2.35, width = 2.35, heading = 70.15, minZ = 30.58, maxZ = 30.68 } ,
+        { coords = vector3(-137.0, -1608.75, 35.03), length = 2.35, width = 2.35, heading = 70.15, minZ = 34.03, maxZ = 36.03 } ,
     },
     ['mafia'] = {
-        { coords = vector3(-1525.82, 148.72, 60.79), length = 2.35, width = 2.35, heading = 271.27, minZ = 30.58, maxZ = 30.68 } ,
+        { coords = vector3(-1525.82, 148.72, 60.79), length = 2.35, width = 2.35, heading = 271.27, minZ = 59.79, maxZ = 61.79 } ,
     },
 }
