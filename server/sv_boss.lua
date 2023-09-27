@@ -11,7 +11,7 @@ function ExploitBan(id, reason)
 		2147483647,
 		'qb-management'
 	})
-	TriggerEvent('qb-log:server:CreateLog', 'bans', 'Player Banned', 'red', string.format('%s was banned by %s for %s', GetPlayerName(id), 'qb-management', reason), true)
+	TriggerEvent('qb-log:server:CreateLog', src, 'bans', 'Player Banned', 'red', string.format('%s was banned by %s for %s', GetPlayerName(id), 'qb-management', reason), true)
 	DropPlayer(id, 'You were permanently banned by the server for: Exploiting')
 end
 
@@ -68,7 +68,7 @@ RegisterNetEvent("qb-bossmenu:server:withdrawMoney", function(amount)
 	local job = Player.PlayerData.job.name
 	if RemoveMoney(job, amount) then
 		Player.Functions.AddMoney("cash", amount, 'Boss menu withdraw')
-		TriggerEvent('qb-log:server:CreateLog', 'bossmenu', 'Withdraw Money', "blue", Player.PlayerData.name.. "Withdrawal $" .. amount .. ' (' .. job .. ')', false)
+		TriggerEvent('qb-log:server:CreateLog', src, 'bossmenu', 'Withdraw Money', "blue", Player.PlayerData.name.. "Withdrawal $" .. amount .. ' (' .. job .. ')', false)
 		TriggerClientEvent('QBCore:Notify', src, "You have withdrawn: $" ..amount, "success")
 	else
 		TriggerClientEvent('QBCore:Notify', src, "You dont have enough money in the account!", "error")
@@ -86,7 +86,7 @@ RegisterNetEvent("qb-bossmenu:server:depositMoney", function(amount)
 	if Player.Functions.RemoveMoney("cash", amount) then
 		local job = Player.PlayerData.job.name
 		AddMoney(job, amount)
-		TriggerEvent('qb-log:server:CreateLog', 'bossmenu', 'Deposit Money', "blue", Player.PlayerData.name.. "Deposit $" .. amount .. ' (' .. job .. ')', false)
+		TriggerEvent('qb-log:server:CreateLog', src, 'bossmenu', 'Deposit Money', "blue", Player.PlayerData.name.. "Deposit $" .. amount .. ' (' .. job .. ')', false)
 		TriggerClientEvent('QBCore:Notify', src, "You have deposited: $" ..amount, "success")
 	else
 		TriggerClientEvent('QBCore:Notify', src, "You dont have enough money to add!", "error")
@@ -108,7 +108,7 @@ AddEventHandler("qb-bossmenu:server:okokBillingDeposit", function(job, amount)
 
     TriggerClientEvent('qb-bossmenu:client:refreshSociety', -1, job, Accounts[job])
     --SaveResourceFile(GetCurrentResourceName(), "./database.json", json.encode(Accounts), -1)
-    TriggerEvent('qb-log:server:CreateLog', 'bossmenu', 'Deposit Money', "Successfully deposited $" .. amount .. ' (' .. job .. ')', src)
+    TriggerEvent('qb-log:server:CreateLog', src, 'bossmenu', 'Deposit Money', "Successfully deposited $" .. amount .. ' (' .. job .. ')', src)
 end)
 
 QBCore.Functions.CreateCallback('qb-bossmenu:server:GetAccount', function(_, cb, jobname)
@@ -186,7 +186,7 @@ RegisterNetEvent('qb-bossmenu:server:FireEmployee', function(target)
 		if target ~= Player.PlayerData.citizenid then
 			if Employee.PlayerData.job.grade.level > Player.PlayerData.job.grade.level then TriggerClientEvent('QBCore:Notify', src, "You cannot fire this citizen!", "error") return end
 			if Employee.Functions.SetJob("unemployed", '0') then
-				TriggerEvent("qb-log:server:CreateLog", "bossmenu", "Job Fire", "red", Player.PlayerData.charinfo.firstname .. " " .. Player.PlayerData.charinfo.lastname .. ' successfully fired ' .. Employee.PlayerData.charinfo.firstname .. " " .. Employee.PlayerData.charinfo.lastname .. " (" .. Player.PlayerData.job.name .. ")", false)
+				TriggerEvent('qb-log:server:CreateLog', src, "bossmenu", "Job Fire", "red", Player.PlayerData.charinfo.firstname .. " " .. Player.PlayerData.charinfo.lastname .. ' successfully fired ' .. Employee.PlayerData.charinfo.firstname .. " " .. Employee.PlayerData.charinfo.lastname .. " (" .. Player.PlayerData.job.name .. ")", false)
 				TriggerClientEvent('QBCore:Notify', src, "Employee fired!", "success")
 				TriggerClientEvent('QBCore:Notify', Employee.PlayerData.source , "You have been fired! Good luck.", "error")
 			else
@@ -212,7 +212,7 @@ RegisterNetEvent('qb-bossmenu:server:FireEmployee', function(target)
 			job.grade.level = 0
 			MySQL.update('UPDATE players SET job = ? WHERE citizenid = ?', { json.encode(job), target })
 			TriggerClientEvent('QBCore:Notify', src, "Employee fired!", "success")
-			TriggerEvent("qb-log:server:CreateLog", "bossmenu", "Job Fire", "red", Player.PlayerData.charinfo.firstname .. " " .. Player.PlayerData.charinfo.lastname .. ' successfully fired ' .. Employee.PlayerData.charinfo.firstname .. " " .. Employee.PlayerData.charinfo.lastname .. " (" .. Player.PlayerData.job.name .. ")", false)
+			TriggerEvent('qb-log:server:CreateLog', src, "bossmenu", "Job Fire", "red", Player.PlayerData.charinfo.firstname .. " " .. Player.PlayerData.charinfo.lastname .. ' successfully fired ' .. Employee.PlayerData.charinfo.firstname .. " " .. Employee.PlayerData.charinfo.lastname .. " (" .. Player.PlayerData.job.name .. ")", false)
 		else
 			TriggerClientEvent('QBCore:Notify', src, "Civilian not in city.", "error")
 		end
@@ -231,7 +231,7 @@ RegisterNetEvent('qb-bossmenu:server:HireEmployee', function(recruit)
 	if Target and Target.Functions.SetJob(Player.PlayerData.job.name, 0) then
 		TriggerClientEvent('QBCore:Notify', src, "You hired " .. (Target.PlayerData.charinfo.firstname .. ' ' .. Target.PlayerData.charinfo.lastname) .. " come " .. Player.PlayerData.job.label .. "", "success")
 		TriggerClientEvent('QBCore:Notify', Target.PlayerData.source , "You were hired as " .. Player.PlayerData.job.label .. "", "success")
-		TriggerEvent('qb-log:server:CreateLog', 'bossmenu', 'Recruit', "lightgreen", (Player.PlayerData.charinfo.firstname .. ' ' .. Player.PlayerData.charinfo.lastname).. " successfully recruited " .. (Target.PlayerData.charinfo.firstname .. ' ' .. Target.PlayerData.charinfo.lastname) .. ' (' .. Player.PlayerData.job.name .. ')', false)
+		TriggerEvent('qb-log:server:CreateLog', src, 'bossmenu', 'Recruit', "lightgreen", (Player.PlayerData.charinfo.firstname .. ' ' .. Player.PlayerData.charinfo.lastname).. " successfully recruited " .. (Target.PlayerData.charinfo.firstname .. ' ' .. Target.PlayerData.charinfo.lastname) .. ' (' .. Player.PlayerData.job.name .. ')', false)
 	end
 	TriggerClientEvent('qb-bossmenu:client:OpenMenu', src)
 end)
@@ -263,3 +263,12 @@ QBCore.Functions.CreateCallback('qb-bossmenu:getplayers', function(source, cb)
 		end)
 	cb(players)
 end)
+
+
+            -- Billing UI (billing_ui) integrations
+            exports("getAccounts", function() 
+                return Accounts
+            end)
+            exports("addMoney", AddMoney)
+            exports("removeMoney", RemoveMoney)
+        
